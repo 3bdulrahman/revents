@@ -7,7 +7,7 @@ const events = [
   {
     id: '1',
     title: 'Trip to Tower of London',
-    date: '2018-03-27T11:00:00+00:00',
+    date: '2018-03-27',
     category: 'culture',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -31,7 +31,7 @@ const events = [
   {
     id: '2',
     title: 'Trip to Punch and Judy Pub',
-    date: '2018-03-28T14:00:00+00:00',
+    date: '2018-03-28',
     category: 'drinks',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -59,9 +59,34 @@ const events = [
       super(props);
       this.state = {
          events:events,
-         isOpen:false
+         isOpen:false,
+         selectEvent:null
       }
    }
+  handelEdite = (eventEdit)=>()=>{
+     this.setState({
+        selectEvent:eventEdit,
+        isOpen:true
+     })
+  }
+  handeDelete = (id)=>()=>{
+      const eventsNew = this.state.events.filter(event=> event.id!==id);
+      this.setState({
+         events:eventsNew
+      })
+
+  }
+  handelUpdate = (eventUpdate)=>{
+      this.setState({
+         events:this.state.events.map(event=>{
+             if(eventUpdate.id === event.id){
+               return Object.assign({},eventUpdate)
+             }else{
+                return event
+             }
+         })
+      })
+  }
   handelCreate = (newEvent)=>{
     newEvent.id = cuid();
     newEvent.hostPhotoURL='https://randomuser.me/api/portraits/men/22.jpg';
@@ -72,7 +97,10 @@ const events = [
     })
   }
   handelOpen = ()=>{
-     this.setState({isOpen:true})
+     this.setState({
+       isOpen:true,
+       selectEvent:null
+      })
   }
   handelCancel = ()=>{
       this.setState({isOpen:false})
@@ -83,13 +111,13 @@ const events = [
          <Grid>
              <Grid.Column width={10}>
              <h1>Evenets</h1>
-                    <EventList events={this.state.events} />
+                    <EventList edit={this.handelEdite} del={this.handeDelete} events={this.state.events} />
              </Grid.Column>
              <Grid.Column width={6}>
-                <Button positive onClick={this.handelOpen} content='Create Event' />
+                <Button positive onClick={this.handelOpen}  content='Create Event' />
                 <br/>
                 <br/>
-                   {this.state.isOpen&& <EventForm create={this.handelCreate} cancel={this.handelCancel} />}
+                   {this.state.isOpen&& <EventForm  update={this.handelUpdate} itemSelect={this.state.selectEvent} create={this.handelCreate} cancel={this.handelCancel} />}
              </Grid.Column>
              <Grid.Column width={10}>
               
