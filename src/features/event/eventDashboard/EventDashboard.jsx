@@ -110,7 +110,7 @@ const events = [
       <div>
          <Grid>
              <Grid.Column width={10}>
-             <h1>Evenets</h1>
+             <h1>Events</h1>
                     <EventList edit={this.handelEdite} del={this.handeDelete} events={this.state.events} />
              </Grid.Column>
              <Grid.Column width={6}>
