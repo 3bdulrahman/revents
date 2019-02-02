@@ -10,6 +10,7 @@ import userDetails from '../../features/user/userDetails/userDetails'
 import settingDashboard from '../../features/user/setting/settingDashboard'
 import eventForm from '../../features/event/eventForm/eventForm'
 import HomePage from '../../features/home/HomePage'
+import testC from '../../features/testComponent/testC'
 class App extends Component {
   render() {
     return (
@@ -28,6 +29,7 @@ class App extends Component {
                <Route path='/profile/:id' component={userDetails} />
                <Route path='/setting' component={settingDashboard} />
                <Route path='/createEvent' component={eventForm} />
+               <Route path='/test' component={testC} />
                 </Switch>
              </Container>
                  
