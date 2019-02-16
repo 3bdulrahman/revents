@@ -25,6 +25,7 @@ class App extends Component {
                 <Switch>
                 <Route path='/events' component={Dashboard} />
                <Route path='/event/:id'  component={EventDetailedPage} />
+               <Route path='/manage/:id'  component={eventForm} />
                <Route path='/people' component={PepoleDashboard}/>
                <Route path='/profile/:id' component={userDetails} />
                <Route path='/setting' component={settingDashboard} />

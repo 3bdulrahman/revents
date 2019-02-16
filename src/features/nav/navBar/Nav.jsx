@@ -30,7 +30,7 @@ import SignedOut from './SignedOut'
                 <Menu.Item as={NavLink} to='/events' name="Events" />}
                 {this.state.auth&&<Menu.Item as={NavLink} to='/people' name="People" />}
                 {this.state.auth&&<Menu.Item>
-                  <Button floated="left" positive inverted content="Create Event" />
+                  <Button as={Link} to='/createEvent' floated="left" positive inverted content="Create Event" />
                 </Menu.Item>}
                 {this.state.auth?(
                 <SignedIn logout={this.logout} />):
